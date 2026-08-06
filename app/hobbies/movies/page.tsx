@@ -11,6 +11,7 @@ import { ShareExportBar } from "@/components/ui/ShareExportBar";
 import { StarRating } from "@/components/ui/StarRating";
 import { Tag } from "@/components/ui/Tag";
 import { CAN_MANAGE_CONTENT } from "@/lib/site-mode";
+import { withBasePath } from "@/lib/public-path";
 
 const STATUSES: MovieStatus[] = ["想看", "在看", "已看"];
 const MOVIE_KINDS: MovieKind[] = ["电影", "电视剧"];
@@ -23,7 +24,7 @@ const getMovieKind = (movie: StoredMovie): MovieKind => movie.kind ?? (movie.cat
 const getCategoryLabel = (movie: StoredMovie): string => movie.category?.replace(/^(电影|电视剧)\s*·\s*/, "") || "未分类";
 
 function Poster({ item, large = false }: { item: StoredMovie; large?: boolean }) {
-  const src = item.coverDataUrl || item.cover;
+  const src = item.coverDataUrl || withBasePath(item.cover);
   return <div className={`media-poster${large ? " media-poster-large" : ""}`}>{src ? <Image src={src} alt={`${item.title} 海报`} fill sizes={large ? "300px" : "(max-width: 640px) 44vw, 190px"} unoptimized={src.startsWith("data:")} /> : <div className="media-poster-placeholder"><span>SCREEN</span><strong>{item.title.slice(0, 2)}</strong></div>}<span className="media-poster-glow" aria-hidden="true" /></div>;
 }
 

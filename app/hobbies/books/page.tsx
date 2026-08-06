@@ -11,6 +11,7 @@ import { ShareExportBar } from "@/components/ui/ShareExportBar";
 import { StarRating } from "@/components/ui/StarRating";
 import { Tag } from "@/components/ui/Tag";
 import { CAN_MANAGE_CONTENT } from "@/lib/site-mode";
+import { withBasePath } from "@/lib/public-path";
 
 const STATUSES: BookStatus[] = ["想读", "在读", "已读"];
 const STATUS_COLOR: Record<BookStatus, "outline" | "accent" | "default"> = { 想读: "outline", 在读: "accent", 已读: "default" };
@@ -31,7 +32,7 @@ const emptyForm = (): StoredBook => ({
 });
 
 function Cover({ item, large = false }: { item: StoredBook; large?: boolean }) {
-  const src = item.coverDataUrl || item.cover;
+  const src = item.coverDataUrl || withBasePath(item.cover);
   return (
     <div className={`library-cover${large ? " library-cover-large" : ""}`}>
       {src ? <Image src={src} alt={`${item.title} 封面`} fill sizes={large ? "280px" : "(max-width: 640px) 44vw, 190px"} unoptimized={src.startsWith("data:")} /> : <div className="library-cover-placeholder"><span>BOOK</span><strong>{item.title.slice(0, 1)}</strong></div>}

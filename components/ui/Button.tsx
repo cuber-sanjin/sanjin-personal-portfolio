@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ReactNode } from "react";
+import { withBasePath } from "@/lib/public-path";
 
 interface ButtonProps {
   children: ReactNode;
@@ -63,7 +64,7 @@ export function Button({
       return (
         <a
           className={cls}
-          href={href}
+          href={external ? href : withBasePath(href)}
           download={download || undefined}
           target={external ? "_blank" : undefined}
           rel={external ? "noopener noreferrer" : undefined}

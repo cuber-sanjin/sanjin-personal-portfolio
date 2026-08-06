@@ -11,6 +11,7 @@ import { ShareExportBar } from "@/components/ui/ShareExportBar";
 import { StarRating } from "@/components/ui/StarRating";
 import { Tag } from "@/components/ui/Tag";
 import { CAN_MANAGE_CONTENT } from "@/lib/site-mode";
+import { withBasePath } from "@/lib/public-path";
 
 const PLATFORMS: GamePlatform[] = ["Steam", "手机游戏", "主机游戏"];
 const STATUSES: GameStatus[] = ["想玩", "在玩", "已通关", "暂时搁置"];
@@ -21,7 +22,7 @@ const MAX_IMAGE_BYTES = 1024 * 1024;
 const emptyForm = (): StoredGame => ({ id: "", title: "", platform: "Steam", device: "PC · Steam", status: "想玩", rating: 0, note: "", intro: "", reflection: "", category: "", year: "", date: new Date().toISOString().slice(0, 10) });
 
 function GameCover({ item, large = false }: { item: StoredGame; large?: boolean }) {
-  const src = item.coverDataUrl || item.cover;
+  const src = item.coverDataUrl || withBasePath(item.cover);
   return <div className={`media-poster game-cover${large ? " media-poster-large" : ""}`}>{src ? <Image src={src} alt={`${item.title} 游戏封面`} fill sizes={large ? "300px" : "(max-width: 640px) 44vw, 190px"} unoptimized={src.startsWith("data:")} /> : <div className="media-poster-placeholder game-cover-placeholder"><span>PLAYER 01</span><strong>{item.title.slice(0, 2)}</strong></div>}<span className="media-poster-glow" aria-hidden="true" /></div>;
 }
 
