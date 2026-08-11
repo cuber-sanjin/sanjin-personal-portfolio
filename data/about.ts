@@ -5,14 +5,14 @@
 
 export const personalInfo = {
   name: "SANJIN",
-  title: "应届毕业生 · 数据分析与应用开发方向",
-  tagline: "以真实项目记录数据分析、Web 应用与 AI 辅助开发实践。",
+  title: "应届毕业生 · Java 后端与 AI 应用方向",
+  tagline: "以企业采购平台与销售分析 Agent 为主线，记录 Java 后端、AI 应用与数据可视化实践。",
   github: "https://github.com/cuber-sanjin",
   resumeFile: "/SANJIN-Resume.docx",
 };
 
 export const jobPreference = {
-  targetRoles: ["数据分析", "AI 应用开发", "Java Web 开发"],
+  targetRoles: ["Java 后端开发", "AI 应用开发", "数据分析"],
   targetCities: ["面议"],
   availability: "2026 届应届毕业生",
   workMode: ["全职", "实习"],

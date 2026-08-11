@@ -9,18 +9,19 @@ import { personalInfo, jobPreference } from "@/data/about";
 
 const CAPABILITIES = [
   {
-    title: "Web 应用实践",
-    desc: "使用 HTML、CSS、JavaScript、React/Next.js 与 Java Web 完成作品集、图书借阅管理、PWA 等课程与个人项目，并持续完善工程基础。",
+    title: "企业级 Java 后端",
+    desc: "围绕企业礼赠采购平台，把登录、商品、订单、审批、库存与履约拆成清晰的业务边界，使用 Java 21、Spring Boot、MyBatis、MySQL 与 Redis 完成后端实现。",
     icon: (
       <>
-        <rect x="2" y="3" width="20" height="14" rx="2" />
-        <path d="M8 21h8M12 17v4" />
+        <rect x="4" y="4" width="16" height="5" rx="1" />
+        <rect x="4" y="15" width="16" height="5" rx="1" />
+        <path d="M8 6.5h.01M8 17.5h.01M12 9v6" />
       </>
     ),
   },
   {
-    title: "AI 应用实践",
-    desc: "在痛风小程序中尝试将图片识别能力接入具体使用场景，并持续学习接口调用、结果处理与功能验证。",
+    title: "AI Agent 与 RAG",
+    desc: "在销售数据分析 Agent 中使用 LangChain4j 工具编排，在 AegisGift 中结合 Spring AI 与 pgvector，支持规则兜底、流式回答与可追溯知识检索。",
     icon: (
       <>
         <rect x="4" y="7" width="16" height="12" rx="3" />
@@ -29,8 +30,8 @@ const CAPABILITIES = [
     ),
   },
   {
-    title: "数据处理与可视化",
-    desc: "使用 Python、Pandas、jieba、LDA、ECharts 完成微博文本分析和课程数据看板，关注数据清洗、特征处理与可视化表达。",
+    title: "销售数据分析",
+    desc: "把订单、产品、区域和人员数据转成排名、趋势、利润与异常信号，通过 ECharts 图表和自然语言问答帮助销售团队快速定位问题。",
     icon: (
       <>
         <path d="M3 3v18h18M8 17v-5M13 17V8M18 17v-9" />
@@ -38,8 +39,8 @@ const CAPABILITIES = [
     ),
   },
   {
-    title: "工程协作与学习",
-    desc: "使用 Git/GitHub 管理代码，配合 PyCharm、VS Code、Android Studio 等工具进行运行验证、问题定位与项目文档整理。",
+    title: "Vue 全栈与工程交付",
+    desc: "使用 Vue 3、Pinia、Element Plus 与 SSE 完成业务工作台交互，配合 MDX、GitHub Actions 与静态部署持续交付可验证成果。",
     icon: (
       <>
         <path d="M9 18h6M10 21h4M12 3a6 6 0 00-3.5 10.9c.5.4.9 1 .9 1.6V16h5v-.5c0-.6.4-1.2.9-1.6A6 6 0 0012 3z" />
@@ -114,7 +115,7 @@ export default function HomePage() {
           <div className="reveal">
             <SectionHeading
               align="center"
-              subtitle="以课程设计与个人项目为载体，持续积累数据处理、应用开发和工程协作经验。"
+              subtitle="围绕企业采购平台与销售分析 Agent，持续积累后端架构、AI 应用、数据可视化与工程交付经验。"
             >
               我能做什么
             </SectionHeading>
