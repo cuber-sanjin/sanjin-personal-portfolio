@@ -6,7 +6,7 @@ import { getAllProjects } from "@/lib/content";
 export const metadata: Metadata = {
   title: "项目",
   description:
-    "个人毕业设计与课程项目作品集：微博舆情分析、微信小程序、网页游戏、前端站点、PWA 与 Java Web 实践。",
+    "个人项目作品集：企业礼赠采购平台、销售数据分析 Agent、微博舆情分析、微信小程序、网页游戏与 Java Web 实践。",
 };
 
 export default function ProjectsPage() {
@@ -37,7 +37,7 @@ export default function ProjectsPage() {
     >
       <div style={{ maxWidth: "var(--container-max)", margin: "0 auto" }}>
         <SectionHeading
-          subtitle="按技术难度与功能完整性排序展示，覆盖 NLP 舆情分析、微信小程序、网页游戏、前端站点、PWA 与 Java Web 等方向。点击项目进入详情查看现有实现。"
+          subtitle="按技术难度与功能完整性排序展示，优先收录企业采购平台与 AI 数据分析 Agent；点击项目进入详情查看技术架构、业务边界与运行截图。"
         >
           全部项目
         </SectionHeading>
