@@ -77,6 +77,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                       s.startsWith("/") ? `${BASE}${s}` : s
                     ),
                   ]}
+                  alt={frontmatter.title}
                   portrait={slug === "gout-diet-guide"}
                 />
               </div>

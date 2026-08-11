@@ -279,19 +279,27 @@ export function ProjectsBoard({ mdxProjects }: { mdxProjects: MdxProjectMeta[] }
                   <div className="project-card" style={{ height: "100%", borderRadius: "var(--radius-lg)", overflow: "hidden", backgroundColor: "var(--color-bg-elevated)", border: "1px solid var(--color-border)" }}>
                     <div
                       className="project-card-media"
-                      style={{
-                        width: "100%",
-                        aspectRatio: "16 / 9",
-                        backgroundColor: "var(--color-bg-tertiary)",
-                        backgroundImage: coverUrl(item.cover) ? `url(${coverUrl(item.cover)})` : undefined,
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      {!item.cover && <span style={{ fontSize: "2rem", color: "var(--color-text-muted)" }}>📁</span>}
+                    style={{
+                      width: "100%",
+                      aspectRatio: "16 / 9",
+                      backgroundColor: "var(--color-bg-tertiary)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      position: "relative",
+                      overflow: "hidden",
+                    }}
+                  >
+                    {coverUrl(item.cover) && (
+                      <Image
+                        src={coverUrl(item.cover)!}
+                        alt={`${item.title} 项目封面`}
+                        fill
+                        sizes="(max-width: 820px) 100vw, 50vw"
+                        style={{ objectFit: "cover" }}
+                      />
+                    )}
+                    {!item.cover && <span style={{ fontSize: "2rem", color: "var(--color-text-muted)" }}>📁</span>}
                     </div>
                     <div style={{ padding: "var(--space-5)" }}>
                       <div style={{ display: "flex", alignItems: "center", gap: "var(--space-3)", marginBottom: "var(--space-3)" }}>

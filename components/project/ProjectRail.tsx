@@ -7,8 +7,6 @@ import { getAllProjects } from "@/lib/content";
  * 当前项目高亮。移动端自动折叠为横向滚动条（隐藏 tooltip）。
  */
 
-const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-
 export function ProjectRail({ currentSlug }: { currentSlug: string }) {
   const others = getAllProjects().filter((p) => p.slug !== currentSlug);
   const current = getAllProjects().find((p) => p.slug === currentSlug);
@@ -30,10 +28,7 @@ export function ProjectRail({ currentSlug }: { currentSlug: string }) {
         </p>
       ) : (
         <nav className="rail-list" aria-label="跳转到其他项目">
-          {others.map((p) => {
-            const coverUrl = p.frontmatter.cover
-              ? `${p.frontmatter.cover.startsWith("/") ? BASE : ""}${p.frontmatter.cover}`
-              : undefined;
+          {others.map((p, index) => {
             return (
               <Link
                 key={p.slug}
@@ -42,12 +37,8 @@ export function ProjectRail({ currentSlug }: { currentSlug: string }) {
                 data-tooltip={p.frontmatter.title}
                 aria-label={p.frontmatter.title}
               >
-                <span
-                  className="rail-thumb"
-                  style={coverUrl ? { backgroundImage: `url(${coverUrl})` } : undefined}
-                  aria-hidden="true"
-                >
-                  {!coverUrl && <span>📁</span>}
+                <span className="rail-thumb" aria-hidden="true">
+                  <span>{String(index + 1).padStart(2, "0")}</span>
                 </span>
               </Link>
             );

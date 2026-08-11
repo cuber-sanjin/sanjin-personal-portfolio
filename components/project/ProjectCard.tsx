@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Tag } from "@/components/ui/Tag";
 import type { ProjectFrontmatter } from "@/lib/content";
 
@@ -47,9 +48,6 @@ export function ProjectCard({ slug, frontmatter, featured = false }: ProjectCard
             width: "100%",
             aspectRatio: featured ? "16 / 9" : "16 / 10",
             backgroundColor: "var(--color-bg-tertiary)",
-            backgroundImage: coverUrl ? `url(${coverUrl})` : undefined,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -57,6 +55,18 @@ export function ProjectCard({ slug, frontmatter, featured = false }: ProjectCard
             position: "relative",
           }}
         >
+          {coverUrl && (
+            <Image
+              src={coverUrl}
+              alt={`${frontmatter.title} 项目封面`}
+              fill
+              sizes={featured ? "(max-width: 820px) 100vw, 1200px" : "(max-width: 820px) 100vw, 50vw"}
+              priority={featured}
+              loading={featured ? undefined : "lazy"}
+              fetchPriority={featured ? "high" : "auto"}
+              style={{ objectFit: "cover" }}
+            />
+          )}
           {!frontmatter.cover && (
             <span
               style={{

@@ -1,6 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import Image from "next/image";
 
 /**
  * ImageCarousel — 多图轮切换
@@ -9,13 +10,16 @@ import { useCallback, useEffect, useState } from "react";
  */
 export function ImageCarousel({
   images,
+  alt = "项目截图",
   portrait = false,
 }: {
   images: string[];
+  alt?: string;
   portrait?: boolean;
 }) {
   const [current, setCurrent] = useState(0);
-  const slides = Array.from(new Set(images));
+  const [loaded, setLoaded] = useState<Record<string, boolean>>({});
+  const slides = useMemo(() => Array.from(new Set(images)), [images]);
   const n = slides.length;
 
   const prev = useCallback(() => setCurrent((c) => (c - 1 + n) % n), [n]);
@@ -31,23 +35,38 @@ export function ImageCarousel({
     return () => window.removeEventListener("keydown", onKey);
   }, [n, prev, next]);
 
+  useEffect(() => {
+    if (n <= 1) return;
+    const timer = window.setTimeout(() => {
+      const image = new window.Image();
+      image.decoding = "async";
+      image.src = slides[(current + 1) % n];
+    }, 450);
+    return () => window.clearTimeout(timer);
+  }, [current, n, slides]);
+
   if (n === 0) return null;
 
   return (
     <div className="carousel" role="region" aria-label="项目截图轮播">
       <div className={`carousel-viewport${portrait ? " carousel-viewport-portrait" : ""}`}>
-        {slides.map((src, i) => (
-          <div
-            key={i}
-            className={`carousel-slide${i === current ? " is-active" : ""}`}
-            style={{
-              backgroundImage: `url(${src})`,
-              opacity: i === current ? 1 : 0,
-              pointerEvents: i === current ? "auto" : "none",
-            }}
-            aria-hidden={i !== current}
-          />
-        ))}
+        {!loaded[slides[current]] && (
+          <span className="carousel-loading" aria-live="polite">
+            正在载入第 {current + 1} 张截图…
+          </span>
+        )}
+        <Image
+          key={slides[current]}
+          className={`carousel-image${loaded[slides[current]] ? " is-loaded" : ""}`}
+          src={slides[current]}
+          alt={`${alt} · 第 ${current + 1} 张`}
+          fill
+          sizes="(max-width: 900px) 100vw, 1100px"
+          priority={current === 0}
+          loading={current === 0 ? undefined : "lazy"}
+          fetchPriority={current === 0 ? "high" : "auto"}
+          onLoad={() => setLoaded((value) => ({ ...value, [slides[current]]: true }))}
+        />
 
         {n > 1 && (
           <>
@@ -80,17 +99,18 @@ export function ImageCarousel({
 
       {n > 1 && (
         <div className="carousel-thumbs" role="tablist" aria-label="选择截图">
-          {slides.map((src, i) => (
+          {slides.map((_, i) => (
             <button
               key={i}
               type="button"
               className={`carousel-thumb${i === current ? " is-active" : ""}`}
-              style={{ backgroundImage: `url(${src})` }}
               onClick={() => setCurrent(i)}
               role="tab"
               aria-selected={i === current}
               aria-label={`第 ${i + 1} 张`}
-            />
+            >
+              {String(i + 1).padStart(2, "0")}
+            </button>
           ))}
         </div>
       )}
