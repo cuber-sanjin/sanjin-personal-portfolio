@@ -1416,8 +1416,7 @@ body {
   align-items: start;
 }
 .project-rail {
-  position: sticky;
-  top: var(--space-8);
+  position: static;
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
