@@ -3,8 +3,8 @@ import { getAllProjects } from "@/lib/content";
 
 /**
  * ProjectRail — 项目详情页左侧侧边栏
- * 顶部「返回项目全览」按钮 + 其他项目图标列表（仅图标，悬停显示名称 tooltip），
- * 当前项目高亮。移动端自动折叠为横向滚动条（隐藏 tooltip）。
+ * 使用轻量编号标识、项目名与技术标签建立清晰导航，不额外下载项目封面。
+ * 移动端自动折叠为横向滚动列表。
  */
 
 export function ProjectRail({ currentSlug }: { currentSlug: string }) {
@@ -20,7 +20,12 @@ export function ProjectRail({ currentSlug }: { currentSlug: string }) {
         返回项目全览
       </Link>
 
-      <h4 className="rail-title">其他项目</h4>
+      <div className="rail-current">
+        <span>正在查看</span>
+        <b>{current?.frontmatter.title ?? currentSlug}</b>
+      </div>
+
+      <h4 className="rail-title">继续浏览 · {String(others.length).padStart(2, "0")}</h4>
 
       {others.length === 0 ? (
         <p style={{ fontSize: "var(--text-sm)", color: "var(--color-text-muted)", margin: 0 }}>
@@ -34,21 +39,23 @@ export function ProjectRail({ currentSlug }: { currentSlug: string }) {
                 key={p.slug}
                 href={`/projects/${p.slug}`}
                 className="rail-item"
-                data-tooltip={p.frontmatter.title}
                 aria-label={p.frontmatter.title}
               >
                 <span className="rail-thumb" aria-hidden="true">
                   <span>{String(index + 1).padStart(2, "0")}</span>
                 </span>
+                <span className="rail-item-text">
+                  <span className="rail-name">{p.frontmatter.title}</span>
+                  <span className="rail-role">{p.frontmatter.tags.slice(0, 2).join(" · ")}</span>
+                </span>
+                <svg className="rail-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="m9 18 6-6-6-6" />
+                </svg>
               </Link>
             );
           })}
         </nav>
       )}
-
-      <span className="rail-now" style={{ paddingInline: "var(--space-2)", fontSize: "var(--text-xs)" }}>
-        当前：{current?.frontmatter.title ?? currentSlug}
-      </span>
     </aside>
   );
 }
