@@ -6,6 +6,7 @@
 
 - 企业礼赠采购平台：Spring Boot、MyBatis、Redis、Spring AI、pgvector 与 Vue 运营后台。
 - 叁金销售数据分析 Agent：Spring Boot、LangChain4j、SSE、Vue、Pinia 与 ECharts。
+- 叁金 Sanjin Intelligence Studio：Spring AI 多智能体工作台，覆盖 RAG 文件问答、联网搜索、PPT 生成与深度研究。
 - 微博舆情分析、微信小程序、PWA、网页游戏和 Java Web 课程项目。
 
 ## 本地运行

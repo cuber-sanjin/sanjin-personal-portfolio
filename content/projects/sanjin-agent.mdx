@@ -1,0 +1,57 @@
+---
+title: "叁金 · Sanjin Intelligence Studio"
+summary: "一个有温度的企业级通用智能体工作台：把对话问答、文件知识库、PPT 制作、联网搜索与深度研究收进同一个流式入口。"
+cover: "/projects/sanjin-agent-cover.png"
+date: "2026-08"
+screenshots:
+  - "/projects/sanjin-agent-home.png"
+  - "/projects/sanjin-agent-chat.png"
+  - "/projects/sanjin-agent-code.png"
+  - "/projects/sanjin-agent-suggestions.png"
+  - "/projects/sanjin-agent-ppt-waiting.png"
+  - "/projects/sanjin-agent-ppt-clarify.png"
+priority: 2
+tags: ["Java 21", "Spring Boot", "Spring AI", "MCP", "多智能体", "RAG", "PgVector", "MySQL", "MinIO", "SSE"]
+role: "独立开发 · Agent 架构、后端实现与产品交互"
+period: "2026.07 – 2026.08"
+features:
+  - "五种工作模式统一在一个会话工作台：对话助手、文件问答、PPT 生成、深度研究与技能助手"
+  - "基于 Spring AI ChatModel 和 MCP 工具回调接入大模型与联网搜索，支持 ReAct、Plan-Execute、RAG 等 Agent 模式"
+  - "文件上传后经 PDFBox、Apache POI、Jsoup 解析并写入 PgVector，按语义检索返回可追溯的知识片段"
+  - "PPT Builder 以状态机驱动意图识别、需求澄清、大纲、Schema、配图与渲染，支持断点恢复和模板复用"
+  - "统一 SSE 事件协议流式输出思考、正文、引用、推荐与完成状态，前端同步呈现生成过程"
+  - "MySQL 持久化会话与文件元数据，Redis/Redisson 负责任务并发控制与缓存，MinIO 承载上传文件和生成物"
+challenges:
+  - "用 BaseAgent 抽象共享 ChatMemory、上下文压缩、任务管理和会话服务，同时让各 Agent 保持清晰边界"
+  - "深度研究采用需求澄清 → 计划 → 并发执行 → 批判反思循环，Semaphore 控制工具并发并支持中断后续跑"
+  - "PPT 生成过程拆成可恢复状态，模板 Schema 与渲染服务解耦，兼容 Python-pptx、PptxGenJS 和 HTML 截图渲染"
+  - "作品集仅展示脱敏界面与交互流程，不上传后端源码、模型密钥或基础设施配置"
+links:
+  demo: null
+  repo: null
+---
+
+## 项目说明
+
+叁金（Sanjin）是一个面向日常工作与研究任务的通用智能体平台。用户不需要先理解工具或工作流，只要从自然语言开始，系统便会根据任务切换合适的 Agent：查资料时联网搜索，问内部文件时走 RAG，需要交付物时进入 PPT 状态机，复杂问题则交给可反思的深度研究引擎。
+
+## 技术架构
+
+```text
+浏览器工作台（原生 HTML / CSS / JavaScript）
+  ├─ REST：会话、文件与 PPT 实例管理
+  └─ SSE：统一 AgentStreamEvent（thinking / text / reference / recommend / complete）
+                         │
+Spring Boot + Java 21 + Spring AI
+  ├─ BaseAgent：ChatMemory、上下文压缩、任务生命周期
+  ├─ WebSearch / File / Skills：ReAct + MCP 工具回调
+  ├─ Deep Research：Plan-Execute + 多轮 Critique + 并发控制
+  └─ PPT Builder：State Machine + 模板 Schema + 断点恢复
+                         │
+MySQL（会话与元数据） · PostgreSQL + PgVector（RAG）
+MinIO（文件与生成物） · Redis / Redisson（缓存与任务协调）
+```
+
+## 展示范围
+
+作品集展示欢迎页、工作模式切换、流式代码回答、推荐问题和 PPT 需求澄清等 7 张真实运行截图。项目源码保留在本地工作区，仓库只收录展示素材与技术说明。
